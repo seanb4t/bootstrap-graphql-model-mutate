@@ -13,10 +13,12 @@
   "prConcurrentLimit": 5,
   "automergeType": "pr",
   "platformAutomerge": true,
+  "automergeStrategy": "squash",
+  "requiredStatusChecks": ["build", "test"],
   "packageRules": [
     {
       "description": "Automatically merge minor and patch updates for dev dependencies",
-      "matchDepTypes": ["devDependencies"],
+      "matchDepTypes": ["devDependencies", "testImplementation", "testRuntimeOnly", "testCompileOnly"],
       "matchUpdateTypes": ["minor", "patch"],
       "automerge": true
     },
@@ -64,14 +66,10 @@
     },
     {
       "description": "Security updates should be merged immediately",
-      "matchDatasources": ["maven"],
-      "matchUpdateTypes": ["patch"],
-      "prPriority": 10,
-      "vulnerabilityAlerts": {
-        "enabled": true,
-        "labels": ["security"],
-        "automerge": true
-      }
+      "vulnerabilityAlerts": true,
+      "labels": ["security"],
+      "automerge": true,
+      "prPriority": 10
     }
   ],
   "gradle": {
