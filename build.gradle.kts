@@ -45,6 +45,7 @@ dependencies {
     implementation("org.jetbrains.kotlin:kotlin-reflect")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-reactor")
     implementation("org.springframework.cloud:spring-cloud-starter-circuitbreaker-reactor-resilience4j")
+    implementation("org.jspecify:jspecify:1.0.0")
     compileOnly("org.projectlombok:lombok")
     developmentOnly("org.springframework.boot:spring-boot-devtools")
     developmentOnly("org.springframework.boot:spring-boot-docker-compose")
@@ -72,13 +73,16 @@ dependencyManagement {
 
 kotlin {
     compilerOptions {
-        freeCompilerArgs.addAll("-Xjsr305=strict")
+        freeCompilerArgs.addAll(
+            "-Xjsr305=strict",
+            "-Xnullability-annotations=@org.jspecify.annotations:strict"
+        )
     }
 }
 
 tasks.generateJava {
     schemaPaths.add("${projectDir}/src/main/resources/graphql-client")
-    packageName = "dev.fzymgc.bootstrap.graphqlmodelmutate.bootstrap.graphqlmodelmutate.codegen"
+    packageName = "dev.fzymgc.bootstrap.graphqlmodelmutate.codegen"
     generateClient = true
 }
 

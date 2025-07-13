@@ -2,6 +2,36 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
+## JSpecify Nullability Annotations
+
+This project uses JSpecify 1.0.0 for null-safety annotations. These annotations improve interoperability between Java and Kotlin code.
+
+### Key Guidelines
+- The base package `dev.fzymgc.bootstrap.graphqlmodelmutate` is marked with `@NullMarked`, making all types non-null by default
+- Use `@Nullable` annotation for parameters, return types, or fields that can be null
+- Kotlin compiler is configured with strict nullability checking via `-Xjsr305=strict` and `-Xnullability-annotations=@org.jspecify.annotations:strict`
+- Both Kotlin and Java code should use these annotations for public APIs
+
+### Example Usage
+```java
+// Java example
+public String processValue(@Nullable String input) {
+    return input != null ? input : "default";
+}
+```
+
+```kotlin
+// Kotlin example - no @Nullable needed, use ? for nullable types
+fun findUser(id: String): User? {
+    return repository.findById(id)
+}
+```
+
+### Important Notes
+- In Kotlin code, do NOT use @Nullable annotations - Kotlin's nullable type system (?) handles this
+- JSpecify annotations are primarily useful for Java code that will be consumed by Kotlin
+- The annotations help Kotlin understand Java nullability when Java code is called from Kotlin
+
 ## Build Commands
 
 ```bash
