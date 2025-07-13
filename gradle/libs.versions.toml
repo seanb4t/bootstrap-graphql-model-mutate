@@ -1,0 +1,130 @@
+[versions]
+# Kotlin
+kotlin = "2.0.21"
+
+# Spring
+springBoot = "3.5.3"
+springCloudVersion = "2025.0.0"
+springDependencyManagement = "1.1.7"
+
+# Netflix DGS
+netflixDgs = "10.2.1"
+netflixDgsCodegen = "7.0.3"
+
+# GraalVM
+graalvmNative = "0.10.6"
+
+# JTE
+jte = "3.1.16"
+
+# Code Quality
+detekt = "1.23.8"
+ktlint = "13.0.0"
+ktlintCore = "1.5.0"
+
+# Libraries
+jackson = "2.18.2"
+micrometer = "1.15.0"
+jspecify = "1.0.0"
+lombok = "1.18.36"
+projectReactor = "3.7.1"
+kotlinxCoroutines = "1.9.0"
+
+# Testing
+testcontainers = "1.20.5"
+junit = "5.11.5"
+
+[libraries]
+# Spring Boot Starters
+spring-boot-starter-actuator = { module = "org.springframework.boot:spring-boot-starter-actuator" }
+spring-boot-starter-data-cassandra = { module = "org.springframework.boot:spring-boot-starter-data-cassandra" }
+spring-boot-starter-data-cassandra-reactive = { module = "org.springframework.boot:spring-boot-starter-data-cassandra-reactive" }
+spring-boot-starter-security = { module = "org.springframework.boot:spring-boot-starter-security" }
+spring-boot-starter-webflux = { module = "org.springframework.boot:spring-boot-starter-webflux" }
+spring-boot-starter-thymeleaf = { module = "org.springframework.boot:spring-boot-starter-thymeleaf" }
+spring-boot-starter-test = { module = "org.springframework.boot:spring-boot-starter-test" }
+spring-boot-testcontainers = { module = "org.springframework.boot:spring-boot-testcontainers" }
+spring-boot-devtools = { module = "org.springframework.boot:spring-boot-devtools" }
+spring-boot-docker-compose = { module = "org.springframework.boot:spring-boot-docker-compose" }
+spring-boot-configuration-processor = { module = "org.springframework.boot:spring-boot-configuration-processor" }
+
+# Spring Cloud
+spring-cloud-starter-circuitbreaker-reactor-resilience4j = { module = "org.springframework.cloud:spring-cloud-starter-circuitbreaker-reactor-resilience4j" }
+
+# Spring Security
+spring-security-test = { module = "org.springframework.security:spring-security-test" }
+
+# Jackson
+jackson-module-kotlin = { module = "com.fasterxml.jackson.module:jackson-module-kotlin" }
+
+# Netflix DGS
+graphql-dgs-spring-graphql-starter = { module = "com.netflix.graphql.dgs:graphql-dgs-spring-graphql-starter" }
+graphql-dgs-spring-graphql-starter-test = { module = "com.netflix.graphql.dgs:graphql-dgs-spring-graphql-starter-test" }
+
+# JTE
+jte-spring-boot-starter = { module = "gg.jte:jte-spring-boot-starter-3", version.ref = "jte" }
+
+# Micrometer
+micrometer-tracing-bridge-brave = { module = "io.micrometer:micrometer-tracing-bridge-brave" }
+micrometer-registry-prometheus = { module = "io.micrometer:micrometer-registry-prometheus" }
+
+# Reactor
+reactor-kotlin-extensions = { module = "io.projectreactor.kotlin:reactor-kotlin-extensions" }
+reactor-test = { module = "io.projectreactor:reactor-test" }
+
+# Kotlin
+kotlin-reflect = { module = "org.jetbrains.kotlin:kotlin-reflect" }
+kotlin-test-junit5 = { module = "org.jetbrains.kotlin:kotlin-test-junit5" }
+kotlinx-coroutines-reactor = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-reactor" }
+kotlinx-coroutines-test = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test" }
+
+# Other Libraries
+jspecify = { module = "org.jspecify:jspecify", version.ref = "jspecify" }
+lombok = { module = "org.projectlombok:lombok" }
+
+# Testcontainers
+testcontainers-cassandra = { module = "org.testcontainers:cassandra" }
+testcontainers-junit-jupiter = { module = "org.testcontainers:junit-jupiter" }
+
+# JUnit
+junit-platform-launcher = { module = "org.junit.platform:junit-platform-launcher" }
+
+[bundles]
+spring-boot-web = [
+    "spring-boot-starter-actuator",
+    "spring-boot-starter-webflux",
+    "spring-boot-starter-security",
+    "spring-boot-starter-thymeleaf"
+]
+
+spring-boot-data = [
+    "spring-boot-starter-data-cassandra",
+    "spring-boot-starter-data-cassandra-reactive"
+]
+
+kotlin-reactive = [
+    "reactor-kotlin-extensions",
+    "kotlinx-coroutines-reactor"
+]
+
+testing = [
+    "spring-boot-starter-test",
+    "spring-boot-testcontainers",
+    "reactor-test",
+    "kotlin-test-junit5",
+    "kotlinx-coroutines-test",
+    "spring-security-test",
+    "testcontainers-cassandra",
+    "testcontainers-junit-jupiter"
+]
+
+[plugins]
+kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
+kotlin-spring = { id = "org.jetbrains.kotlin.plugin.spring", version.ref = "kotlin" }
+spring-boot = { id = "org.springframework.boot", version.ref = "springBoot" }
+spring-dependency-management = { id = "io.spring.dependency-management", version.ref = "springDependencyManagement" }
+netflix-dgs-codegen = { id = "com.netflix.dgs.codegen", version.ref = "netflixDgsCodegen" }
+graalvm-native = { id = "org.graalvm.buildtools.native", version.ref = "graalvmNative" }
+jte-gradle = { id = "gg.jte.gradle", version.ref = "jte" }
+detekt = { id = "io.gitlab.arturbosch.detekt", version.ref = "detekt" }
+ktlint = { id = "org.jlleitschuh.gradle.ktlint", version.ref = "ktlint" }

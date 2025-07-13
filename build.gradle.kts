@@ -1,13 +1,13 @@
 plugins {
-    kotlin("jvm") version "2.0.21"
-    kotlin("plugin.spring") version "2.0.21"
-    id("org.springframework.boot") version "3.5.3"
-    id("io.spring.dependency-management") version "1.1.7"
-    id("com.netflix.dgs.codegen") version "7.0.3"
-    id("org.graalvm.buildtools.native") version "0.10.6"
-    id("gg.jte.gradle") version "3.1.16"
-    id("io.gitlab.arturbosch.detekt") version "1.23.8"
-    id("org.jlleitschuh.gradle.ktlint") version "13.0.0"
+    alias(libs.plugins.kotlin.jvm)
+    alias(libs.plugins.kotlin.spring)
+    alias(libs.plugins.spring.boot)
+    alias(libs.plugins.spring.dependency.management)
+    alias(libs.plugins.netflix.dgs.codegen)
+    alias(libs.plugins.graalvm.native)
+    alias(libs.plugins.jte.gradle)
+    alias(libs.plugins.detekt)
+    alias(libs.plugins.ktlint)
 }
 
 group = "dev.fzymgc.bootstrap.graphql-model-mutate"
@@ -29,47 +29,53 @@ repositories {
     mavenCentral()
 }
 
-extra["netflixDgsVersion"] = "10.2.1"
-extra["springCloudVersion"] = "2025.0.0"
-
 dependencies {
-    implementation("org.springframework.boot:spring-boot-starter-actuator")
-    implementation("org.springframework.boot:spring-boot-starter-data-cassandra")
-    implementation("org.springframework.boot:spring-boot-starter-data-cassandra-reactive")
-    implementation("org.springframework.boot:spring-boot-starter-security")
-    implementation("org.springframework.boot:spring-boot-starter-webflux")
-    implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
-    implementation("com.netflix.graphql.dgs:graphql-dgs-spring-graphql-starter")
-    implementation("org.springframework.boot:spring-boot-starter-thymeleaf")
-    implementation("gg.jte:jte-spring-boot-starter-3:3.1.16")
-    implementation("io.micrometer:micrometer-tracing-bridge-brave")
-    implementation("io.projectreactor.kotlin:reactor-kotlin-extensions")
-    implementation("org.jetbrains.kotlin:kotlin-reflect")
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-reactor")
-    implementation("org.springframework.cloud:spring-cloud-starter-circuitbreaker-reactor-resilience4j")
-    implementation("org.jspecify:jspecify:1.0.0")
-    compileOnly("org.projectlombok:lombok")
-    developmentOnly("org.springframework.boot:spring-boot-devtools")
-    developmentOnly("org.springframework.boot:spring-boot-docker-compose")
-    runtimeOnly("io.micrometer:micrometer-registry-prometheus")
-    annotationProcessor("org.springframework.boot:spring-boot-configuration-processor")
-    annotationProcessor("org.projectlombok:lombok")
-    testImplementation("org.springframework.boot:spring-boot-starter-test")
-    testImplementation("org.springframework.boot:spring-boot-testcontainers")
-    testImplementation("com.netflix.graphql.dgs:graphql-dgs-spring-graphql-starter-test")
-    testImplementation("io.projectreactor:reactor-test")
-    testImplementation("org.jetbrains.kotlin:kotlin-test-junit5")
-    testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test")
-    testImplementation("org.springframework.security:spring-security-test")
-    testImplementation("org.testcontainers:cassandra")
-    testImplementation("org.testcontainers:junit-jupiter")
-    testRuntimeOnly("org.junit.platform:junit-platform-launcher")
+    // Spring Boot bundles
+    implementation(libs.bundles.spring.boot.web)
+    implementation(libs.bundles.spring.boot.data)
+
+    // Individual Spring dependencies
+    implementation(libs.spring.cloud.starter.circuitbreaker.reactor.resilience4j)
+
+    // Jackson
+    implementation(libs.jackson.module.kotlin)
+
+    // Netflix DGS
+    implementation(libs.graphql.dgs.spring.graphql.starter)
+
+    // JTE
+    implementation(libs.jte.spring.boot.starter)
+
+    // Micrometer
+    implementation(libs.micrometer.tracing.bridge.brave)
+    runtimeOnly(libs.micrometer.registry.prometheus)
+
+    // Kotlin
+    implementation(libs.kotlin.reflect)
+    implementation(libs.bundles.kotlin.reactive)
+
+    // Other libraries
+    implementation(libs.jspecify)
+    compileOnly(libs.lombok)
+
+    // Development dependencies
+    developmentOnly(libs.spring.boot.devtools)
+    developmentOnly(libs.spring.boot.docker.compose)
+
+    // Annotation processors
+    annotationProcessor(libs.spring.boot.configuration.processor)
+    annotationProcessor(libs.lombok)
+
+    // Test dependencies
+    testImplementation(libs.bundles.testing)
+    testImplementation(libs.graphql.dgs.spring.graphql.starter.test)
+    testRuntimeOnly(libs.junit.platform.launcher)
 }
 
 dependencyManagement {
     imports {
-        mavenBom("com.netflix.graphql.dgs:graphql-dgs-platform-dependencies:${property("netflixDgsVersion")}")
-        mavenBom("org.springframework.cloud:spring-cloud-dependencies:${property("springCloudVersion")}")
+        mavenBom("com.netflix.graphql.dgs:graphql-dgs-platform-dependencies:${libs.versions.netflixDgs.get()}")
+        mavenBom("org.springframework.cloud:spring-cloud-dependencies:${libs.versions.springCloudVersion.get()}")
     }
 }
 
@@ -108,7 +114,7 @@ detekt {
 
 // Ktlint configuration
 ktlint {
-    version.set("1.5.0")
+    version.set(libs.versions.ktlintCore.get())
     android.set(false)
     outputToConsole.set(true)
     outputColorName.set("RED")
