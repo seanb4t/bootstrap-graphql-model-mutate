@@ -8,11 +8,7 @@ import org.testcontainers.utility.DockerImageName
 
 @TestConfiguration(proxyBeanMethods = false)
 class TestcontainersConfiguration {
-
     @Bean
     @ServiceConnection
-    fun cassandraContainer(): CassandraContainer<*> {
-        return CassandraContainer(DockerImageName.parse("cassandra:latest"))
-    }
-
+    fun cassandraContainer(): CassandraContainer<*> = CassandraContainer(DockerImageName.parse("cassandra:latest"))
 }

@@ -7,9 +7,8 @@ import org.springframework.context.annotation.Import
 @Import(TestcontainersConfiguration::class)
 @SpringBootTest
 class BootstrapGraphqlModelMutateApplicationTests {
-
     @Test
     fun contextLoads() {
+        // Context loads test - verifies Spring context loads successfully
     }
-
 }

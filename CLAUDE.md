@@ -32,7 +32,49 @@ fun findUser(id: String): User? {
 - JSpecify annotations are primarily useful for Java code that will be consumed by Kotlin
 - The annotations help Kotlin understand Java nullability when Java code is called from Kotlin
 
+## Code Quality and Linting
+
+This project uses Detekt for static code analysis and Ktlint for code formatting.
+
+### Ktlint (Code Formatting)
+- **Version**: 1.5.0 via org.jlleitschuh.gradle.ktlint plugin
+- **Configuration**: See `.editorconfig` file for formatting rules
+- **Style**: Official Kotlin style guide with 120 character line length
+
+### Detekt (Static Analysis)
+- **Version**: 1.23.8
+- **Configuration**: See `detekt.yml` for detailed rule configuration
+- **Note**: Compatible with Kotlin 2.0.21
+
+### Linting Commands
+```bash
+# Format all Kotlin code
+./gradlew formatKotlin
+
+# Check code formatting (without fixing)
+./gradlew ktlintCheck
+
+# Run all code quality checks
+./gradlew checkCodeQuality
+
+# Run Detekt analysis only
+./gradlew detekt
+```
+
+### Key Rules
+- Maximum line length: 120 characters
+- Indentation: 4 spaces
+- Kotlin official style guide
+- Trailing commas allowed
+- Generated code is excluded from checks
+
+### Suppressing Warnings
+- For Ktlint: Use `@Suppress("ktlint:rule-name")` or `// ktlint-disable rule-name`
+- For Detekt: Use `@Suppress("DetektRuleName")` or configure in detekt.yml
+
 ## Build Commands
+
+This project uses **Kotlin 2.0.21** with Java 21.
 
 ```bash
 # Build the project

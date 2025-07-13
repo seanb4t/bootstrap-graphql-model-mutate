@@ -7,5 +7,6 @@ import org.springframework.boot.runApplication
 class BootstrapGraphqlModelMutateApplication
 
 fun main(args: Array<String>) {
+    @Suppress("SpreadOperator") // Required for Spring Boot main method
     runApplication<BootstrapGraphqlModelMutateApplication>(*args)
 }

@@ -1,0 +1,81 @@
+# EditorConfig is awesome: https://EditorConfig.org
+
+# top-most EditorConfig file
+root = true
+
+# Unix-style newlines with a newline ending every file
+[*]
+charset = utf-8
+end_of_line = lf
+indent_style = space
+insert_final_newline = true
+trim_trailing_whitespace = true
+
+# Kotlin and Java files
+[*.{kt,kts,java}]
+indent_size = 4
+continuation_indent_size = 4
+max_line_length = 120
+
+# Kotlin specific
+[*.{kt,kts}]
+ij_kotlin_code_style_defaults = KOTLIN_OFFICIAL
+ij_kotlin_allow_trailing_comma = true
+ij_kotlin_allow_trailing_comma_on_call_site = true
+ij_kotlin_imports_layout = *,java.**,javax.**,kotlin.**,^
+ij_kotlin_name_count_to_use_star_import = 5
+ij_kotlin_name_count_to_use_star_import_for_members = 3
+ij_kotlin_packages_to_use_import_on_demand = java.util.*,kotlinx.android.synthetic.**
+ij_kotlin_blank_lines_after_class_header = 0
+ij_kotlin_blank_lines_around_block_when_branches = 0
+ij_kotlin_blank_lines_before_declaration_with_comment_or_annotation_on_separate_line = 1
+ij_kotlin_keep_blank_lines_before_right_brace = 0
+ij_kotlin_keep_blank_lines_in_code = 1
+ij_kotlin_keep_blank_lines_in_declarations = 1
+ij_kotlin_line_break_after_multiline_when_entry = true
+ij_kotlin_spaces_around_function_type_arrow = true
+ij_kotlin_spaces_around_when_arrow = true
+ij_kotlin_variable_naming_style = snakeCase
+ij_kotlin_parameter_naming_style = camelCase
+
+# XML files
+[*.xml]
+indent_size = 2
+continuation_indent_size = 2
+
+# YAML files
+[*.{yml,yaml}]
+indent_size = 2
+
+# JSON files
+[*.json]
+indent_size = 2
+
+# Gradle files
+[*.gradle]
+indent_size = 2
+
+# Gradle Kotlin DSL files
+[*.gradle.kts]
+indent_size = 4
+
+# Markdown files
+[*.md]
+trim_trailing_whitespace = false
+max_line_length = off
+
+# Properties files
+[*.properties]
+charset = latin1
+
+# Scripts
+[*.{sh,bash}]
+end_of_line = lf
+
+# Batch files
+[*.{cmd,bat}]
+end_of_line = crlf
+
+# Disable ktlint for generated and build files
+[{build/**,generated/**,*.Generated.kt}]
+ktlint = disabled

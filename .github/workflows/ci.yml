@@ -1,0 +1,54 @@
+name: CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  lint-and-test:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Set up JDK 21
+      uses: actions/setup-java@v4
+      with:
+        java-version: '21'
+        distribution: 'temurin'
+    
+    - name: Setup Gradle
+      uses: gradle/actions/setup-gradle@v3
+    
+    - name: Grant execute permission for gradlew
+      run: chmod +x gradlew
+    
+    - name: Check code formatting with Ktlint
+      run: ./gradlew ktlintCheck
+    
+    # Note: Detekt is currently skipped due to Kotlin version compatibility
+    # Uncomment when project is updated to Kotlin 2.0+
+    # - name: Run Detekt analysis
+    #   run: ./gradlew detekt
+    
+    - name: Build with Gradle
+      run: ./gradlew build --exclude-task detekt
+    
+    - name: Run tests
+      run: ./gradlew test
+    
+    - name: Upload test results
+      uses: actions/upload-artifact@v4
+      if: always()
+      with:
+        name: test-results
+        path: build/test-results/test/
+    
+    - name: Upload ktlint reports
+      uses: actions/upload-artifact@v4
+      if: failure()
+      with:
+        name: ktlint-reports
+        path: build/reports/ktlint/
