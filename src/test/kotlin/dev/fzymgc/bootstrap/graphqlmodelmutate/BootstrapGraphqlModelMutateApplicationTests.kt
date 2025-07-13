@@ -1,4 +1,4 @@
-package dev.fzymgc.bootstrap.graphqlmodelmutate.bootstrap.graphqlmodelmutate
+package dev.fzymgc.bootstrap.graphqlmodelmutate
 
 import org.junit.jupiter.api.Test
 import org.springframework.boot.test.context.SpringBootTest

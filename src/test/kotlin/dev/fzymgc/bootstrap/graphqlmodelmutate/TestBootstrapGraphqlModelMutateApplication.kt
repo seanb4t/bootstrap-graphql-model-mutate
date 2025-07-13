@@ -1,4 +1,4 @@
-package dev.fzymgc.bootstrap.graphqlmodelmutate.bootstrap.graphqlmodelmutate
+package dev.fzymgc.bootstrap.graphqlmodelmutate
 
 import org.springframework.boot.fromApplication
 import org.springframework.boot.with
