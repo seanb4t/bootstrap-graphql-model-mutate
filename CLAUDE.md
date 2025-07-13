@@ -2,6 +2,31 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
+## Important Git Workflow
+
+**CRITICAL**: Use a PR (Pull Request) for all features and changes. Do NOT ever commit directly to main.
+
+### Workflow Steps:
+1. Always create a feature branch from main
+2. Make changes in the feature branch
+3. Create a pull request to merge changes
+4. Never push directly to main branch
+
+Example workflow:
+```bash
+# Create and switch to a new branch
+git checkout -b feature/your-feature-name
+
+# Make your changes and commit
+git add .
+git commit -m "Your commit message"
+
+# Push the branch
+git push origin feature/your-feature-name
+
+# Then create a PR on GitHub
+```
+
 ## JSpecify Nullability Annotations
 
 This project uses JSpecify 1.0.0 for null-safety annotations. These annotations improve interoperability between Java and Kotlin code.
