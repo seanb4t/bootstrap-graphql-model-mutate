@@ -41,7 +41,7 @@ dependencies {
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
     implementation("com.netflix.graphql.dgs:graphql-dgs-spring-graphql-starter")
     implementation("org.springframework.boot:spring-boot-starter-thymeleaf")
-    implementation("gg.jte:jte-spring-boot-starter-3:3.1.16")
+    implementation("gg.jte:jte-spring-boot-starter-3:3.2.1")
     implementation("io.micrometer:micrometer-tracing-bridge-brave")
     implementation("io.projectreactor.kotlin:reactor-kotlin-extensions")
     implementation("org.jetbrains.kotlin:kotlin-reflect")
