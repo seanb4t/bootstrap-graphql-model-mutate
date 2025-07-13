@@ -1,6 +1,95 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": [
-    "config:recommended"
-  ]
+    "config:recommended",
+    ":dependencyDashboard",
+    ":semanticCommitTypeAll(chore)"
+  ],
+  "timezone": "Europe/Amsterdam",
+  "schedule": ["after 10pm and before 5am every weekday", "every weekend"],
+  "labels": ["dependencies", "renovate"],
+  "separateMajorMinor": true,
+  "prHourlyLimit": 2,
+  "prConcurrentLimit": 5,
+  "automergeType": "pr",
+  "platformAutomerge": true,
+  "automergeStrategy": "squash",
+  "requiredStatusChecks": ["build", "test"],
+  "packageRules": [
+    {
+      "description": "Automatically merge minor and patch updates for dev dependencies",
+      "matchDepTypes": ["devDependencies", "testImplementation", "testRuntimeOnly", "testCompileOnly"],
+      "matchUpdateTypes": ["minor", "patch"],
+      "automerge": true
+    },
+    {
+      "description": "Automatically merge patch updates for trusted packages",
+      "matchPackagePatterns": ["^org.springframework", "^com.netflix.graphql.dgs", "^org.jetbrains.kotlin"],
+      "matchUpdateTypes": ["patch"],
+      "automerge": true
+    },
+    {
+      "description": "Group Spring Boot and related dependencies",
+      "matchPackagePatterns": ["^org.springframework"],
+      "groupName": "Spring Boot and Spring packages",
+      "groupSlug": "spring"
+    },
+    {
+      "description": "Group Kotlin dependencies",
+      "matchPackagePatterns": ["^org.jetbrains.kotlin", "^org.jetbrains.kotlinx"],
+      "groupName": "Kotlin packages",
+      "groupSlug": "kotlin"
+    },
+    {
+      "description": "Group Netflix DGS dependencies",
+      "matchPackagePatterns": ["^com.netflix.graphql.dgs"],
+      "groupName": "Netflix DGS packages",
+      "groupSlug": "netflix-dgs"
+    },
+    {
+      "description": "Group test dependencies",
+      "matchDepTypes": ["testImplementation", "testRuntimeOnly", "testCompileOnly", "testFixturesImplementation"],
+      "groupName": "Test packages",
+      "groupSlug": "test"
+    },
+    {
+      "description": "Group annotation processors",
+      "matchDepTypes": ["annotationProcessor", "kapt", "ksp"],
+      "groupName": "Annotation processors",
+      "groupSlug": "annotation-processors"
+    },
+    {
+      "description": "Group Gradle plugins",
+      "matchFiles": ["gradle/libs.versions.toml"],
+      "matchDepTypes": ["plugin"],
+      "groupName": "Gradle plugins",
+      "groupSlug": "gradle-plugins"
+    },
+    {
+      "description": "Disable automerge for major updates",
+      "matchUpdateTypes": ["major"],
+      "automerge": false
+    },
+    {
+      "description": "Security updates should be merged immediately",
+      "vulnerabilityAlerts": true,
+      "labels": ["security"],
+      "automerge": true,
+      "prPriority": 10
+    }
+  ],
+  "gradle": {
+    "enabled": true
+  },
+  "postUpdateOptions": [
+    "gradleWrapperValidation"
+  ],
+  "semanticCommits": "enabled",
+  "commitMessagePrefix": "chore(deps):",
+  "commitMessageAction": "update",
+  "commitMessageTopic": "{{depName}}",
+  "commitMessageExtra": "to {{newVersion}}",
+  "rangeStrategy": "bump",
+  "reviewers": ["seanb4t"],
+  "assignees": ["seanb4t"]
 }
