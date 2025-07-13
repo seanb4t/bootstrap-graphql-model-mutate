@@ -48,9 +48,15 @@
     },
     {
       "description": "Group test dependencies",
-      "matchDepTypes": ["test", "testImplementation", "testRuntimeOnly"],
+      "matchDepTypes": ["testImplementation", "testRuntimeOnly", "testCompileOnly", "testFixturesImplementation"],
       "groupName": "Test packages",
       "groupSlug": "test"
+    },
+    {
+      "description": "Group annotation processors",
+      "matchDepTypes": ["annotationProcessor", "kapt", "ksp"],
+      "groupName": "Annotation processors",
+      "groupSlug": "annotation-processors"
     },
     {
       "description": "Group Gradle plugins",
