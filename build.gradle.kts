@@ -29,7 +29,7 @@ repositories {
     mavenCentral()
 }
 
-extra["netflixDgsVersion"] = "10.2.1"
+extra["netflixDgsVersion"] = "10.2.4"
 extra["springCloudVersion"] = "2025.0.0"
 
 dependencies {
